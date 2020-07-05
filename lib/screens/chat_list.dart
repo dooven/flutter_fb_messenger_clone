@@ -7,6 +7,119 @@ class Chats extends StatefulWidget {
 }
 
 class _ChatsState extends State<Chats> {
+  Future showStory(BuildContext parentContext) {
+    final statusBarHeight = MediaQuery.of(context).padding.top;
+
+    return showModalBottomSheet<void>(
+      context: parentContext,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height - statusBarHeight,
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 24,
+                          height: 24,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              'assets/cat-eyes-photo.jpg',
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Text('Catto Catty ')
+                      ],
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Stack(
+                            children: List.generate(
+                              3,
+                              (index) => Container(
+                                height: 35,
+                                width: 35,
+                                margin: EdgeInsets.only(
+                                  left: 25.0 * index,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 3.0,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                    'assets/cat-eyes-photo.jpg',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Seen by 30',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Icon(Icons.share),
+                            Text('Share'),
+                          ],
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Icon(Icons.more_vert),
+                            Text('More'),
+                          ],
+                        ),
+                        SizedBox(width: 16),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/cat-eyes-photo.jpg',
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,13 +192,18 @@ class _ChatsState extends State<Chats> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          Container(
-                            height: 40,
-                            width: 40.0,
-                            child: Icon(Icons.add),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[800],
-                              shape: BoxShape.circle,
+                          GestureDetector(
+                            onTap: () {
+                              return showStory(context);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 40.0,
+                              child: Icon(Icons.add),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[800],
+                                shape: BoxShape.circle,
+                              ),
                             ),
                           ),
                           SizedBox(height: 4),
@@ -98,19 +216,22 @@ class _ChatsState extends State<Chats> {
                     );
                   }
 
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: StatusBadge(
-                      child: Container(
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          shape: BoxShape.circle,
-                        ),
-                        child: CircleAvatar(
-                          radius: 28,
-                          backgroundImage: AssetImage(
-                            'assets/cat-eyes-photo.jpg',
+                  return GestureDetector(
+                    onTap: () => showStory(context),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: StatusBadge(
+                        child: Container(
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,
+                          ),
+                          child: CircleAvatar(
+                            radius: 28,
+                            backgroundImage: AssetImage(
+                              'assets/cat-eyes-photo.jpg',
+                            ),
                           ),
                         ),
                       ),
