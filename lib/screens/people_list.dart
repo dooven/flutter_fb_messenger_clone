@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fb_messenger_clone/widgets/status_badge.dart';
+
+import 'chat.dart';
 
 class PeopleList extends StatefulWidget {
   @override
@@ -43,6 +46,40 @@ class _PeopleListState extends State<PeopleList> {
             ),
           ),
           SizedBox(width: 16),
+        ],
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ListTile(
+                  leading: Container(
+                    width: 40,
+                    height: 40,
+                    child: StatusBadge(
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(
+                          'assets/cat-eyes-photo.jpg',
+                        ),
+                      ),
+                    ),
+                  ),
+                  title: Text(
+                    'My cat friend',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ChatScreen(
+                        receiverName: 'My cat friend',
+                      ),
+                    ));
+                  },
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

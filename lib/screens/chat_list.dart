@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fb_messenger_clone/widgets/widgets.dart';
 
 class Chats extends StatefulWidget {
   @override
@@ -86,42 +87,50 @@ class _ChatsState extends State<Chats> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              height: 80.0,
+              height: 60.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return Column(
-                      children: [
-                        Container(
-                          height: 60,
-                          width: 60.0,
-                          margin: EdgeInsets.symmetric(horizontal: 12),
-                          child: Icon(Icons.add),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[800],
-                            shape: BoxShape.circle,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 40.0,
+                            child: Icon(Icons.add),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[800],
+                              shape: BoxShape.circle,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          'Your story',
-                          style: TextStyle(fontSize: 12.0),
-                        )
-                      ],
+                          SizedBox(height: 4),
+                          Text(
+                            'Your story',
+                            style: TextStyle(fontSize: 12.0),
+                          )
+                        ],
+                      ),
                     );
                   }
-                  return Container(
-                    width: 80.0,
-                    margin: EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[900],
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.blueAccent, width: 3.0),
-                      image: DecorationImage(
-                        image: AssetImage('assets/cat-eyes-photo.jpg'),
-                        fit: BoxFit.cover,
+
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: StatusBadge(
+                      child: Container(
+                        padding: const EdgeInsets.all(3.0),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
+                        ),
+                        child: CircleAvatar(
+                          radius: 28,
+                          backgroundImage: AssetImage(
+                            'assets/cat-eyes-photo.jpg',
+                          ),
+                        ),
                       ),
                     ),
                   );
@@ -130,29 +139,33 @@ class _ChatsState extends State<Chats> {
             ),
           ),
           SliverList(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage('assets/cat-eyes-photo.jpg'),
-                ),
-                title: Text(
-                  'Catto Catty',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18.0,
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ListTile(
+                  leading: StatusBadge(
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/cat-eyes-photo.jpg'),
+                    ),
                   ),
-                ),
-                subtitle: Text("Feed me right now or else ... · 3:35 pm"),
-                trailing: ClipOval(
-                  child: Container(
+                  title: Text(
+                    'Catto Catty',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  subtitle: Text("Feed me right now or else ... · 3:35 pm"),
+                  trailing: Container(
                     width: 12,
                     height: 12,
-                    color: Colors.blue[300],
+                    decoration: BoxDecoration(
+                      color: Colors.blue[300],
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                ),
-              );
-            }),
+                );
+              },
+            ),
           ),
         ],
       ),
