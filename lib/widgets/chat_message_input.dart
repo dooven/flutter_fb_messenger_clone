@@ -25,14 +25,31 @@ class _ChatMessageInputState extends State<ChatMessageInput>
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
 
-    _animation = CurvedAnimation(
+    final curve = CurvedAnimation(
       parent: _animationController,
       curve: Curves.fastOutSlowIn,
     );
+
+    _animation = Tween<double>(begin: 1.0, end: 0.0).animate(curve);
+
+    widget.focusNode.addListener(() {
+      final focusNode = widget.focusNode;
+      if (focusNode.hasFocus) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,36 +61,32 @@ class _ChatMessageInputState extends State<ChatMessageInput>
         child: Row(
           children: [
             Container(
-              child: Row(
-                children: [
-                  SizedBox(width: 8),
-                  Icon(Icons.camera_alt),
-                  SizedBox(width: 8),
-                  Icon(Icons.insert_photo),
-                  SizedBox(width: 8),
-                  Icon(Icons.mic),
-                ],
+              child: SizeTransition(
+                axis: Axis.horizontal,
+                sizeFactor: _animation,
+                child: Row(
+                  children: [
+                    SizedBox(width: 8),
+                    Icon(Icons.camera_alt),
+                    SizedBox(width: 8),
+                    Icon(Icons.insert_photo),
+                    SizedBox(width: 8),
+                    Icon(Icons.mic),
+                  ],
+                ),
               ),
             ),
             Flexible(
               child: Container(
                 margin: EdgeInsets.all(8.0),
                 child: TextField(
+                  onTap: () => _animationController.forward(),
                   controller: widget.textController,
                   onSubmitted: widget.handleSubmitted,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 16),
                     filled: true,
                     hintText: 'Type a message...',
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 0,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(30.0),
-                      ),
-                    ),
                   ),
                   focusNode: widget.focusNode,
                 ),

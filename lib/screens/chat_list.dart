@@ -61,24 +61,6 @@ class _ChatsState extends State<Chats> {
                       filled: true,
                       prefixIcon: Icon(Icons.search),
                       hintText: 'Search',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 0,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(30.0),
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 0,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(30.0),
-                        ),
-                      ),
                     ),
                   ),
                 ),
