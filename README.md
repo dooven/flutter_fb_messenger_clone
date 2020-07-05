@@ -5,9 +5,11 @@ A facebook messenger clone. I created this Flutter app to practice Flutter anima
 This app includes
 
 1. People  + Chat list 
+
 ![People & Chat list](docs/people_and_chats.gif)
 
 2. Story 
+
 ![story](docs/story.gif)
 
 Images used in this repo
