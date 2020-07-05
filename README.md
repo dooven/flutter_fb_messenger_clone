@@ -10,6 +10,8 @@ This app includes
 2. Story 
 ![story](docs/story.gif)
 
+Images used in this repo
+- https://burst.shopify.com/photos/cat-eyes-photo?c=cat
 
 ## Getting Started
 
