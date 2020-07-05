@@ -1,6 +1,15 @@
 # flutter_fb_messenger_clone
 
-A new Flutter project.
+A facebook messenger clone. I created this Flutter app to practice Flutter animations.
+
+This app includes
+
+1. People  + Chat list 
+![People & Chat list](docs/people_and_chats.gif)
+
+2. Story 
+![story](docs/story.gif)
+
 
 ## Getting Started
 
